@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рейтинг игр</title>
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .games-list .game-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .games-list .game-item:hover {
+            background-color: #e8f5e9;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .buttons button:hover {
+            background-color: #45a049;
+        }
+        .delete-button {
+            background-color: #f44336;
+        }
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+        #message-box {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            display: none;
+        }
+        #message-box a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        #message-box a:hover {
+            text-decoration: underline;
+        }
+    </style>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рейтинг игр</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Подключение jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script> <!-- Подключение Vue.js -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> <!-- Подключение jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> <!-- Подключение jQuery UI плагина -->
+</head>
+<body>
+    <div id="app" class="container">
+        <h1 id="main-title">Рейтинг актуальных игр</h1>
+
+        <!-- Сообщение с ссылкой -->
+        <div id="message-box">
+            <p id="message-text"></p>
+            <a id="game-link" href="#" target="_blank">Перейти по ссылке</a>
+        </div>
+
+        <!-- Поле для поиска -->
+        <div class="search-box">
+            <input type="text" v-model="searchQuery" placeholder="Ищите игру...">
+        </div>
+
+        <!-- Кнопки управления -->
+        <div class="buttons">
+            <button id="add-game" v-on:click="addGame({name: 'Elden Ring', rating: '10/10', description: 'Фэнтезийная игра от создателей Dark Souls с огромным открытым миром.', link: 'https://en.bandainamcoent.eu/elden-ring/elden-ring'})">Показать еще</button>
+            <button id="change-title" v-on:click="changeTitle">Обновить</button>
+            <button class="delete-button" id="delete-last" v-on:click="removeLastGame">Очистить</button>
+        </div>
+
+        <!-- Список игр -->
+        <div class="games-list">
+            <div v-for="(game, index) in filteredGames" :key="index" class="game-item" @click="showGameDetails(game)">
+                <h3>{{ game.name }}</h3>
+                <p>Оценка: {{ game.rating }}</p>
+                <p v-show="game.showDescription">{{ game.description }}</p>
+            </div>
+        </div>
+
+        <!-- Кнопка для комментария -->
+        <button v-on:click="handleCommentClick" :disabled="commented">Оставить комментарий</button>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".game-item").hover(
+                function () {
+                    $(this).css("background-color", "#e8f5e9"); // Выбор и изменение стилей элементов (CSS)
+                },
+                function () {
+                    $(this).css("background-color", "#fff");
+                }
+            );
+
+            $(".game-item").click(function () {
+                $(this).find("p").slideToggle(300);
+                $(this).effect("bounce", { times: 2 }, 500);
+            });
+        });
+
+        // Vue.js приложение для управления данными
+        new Vue({
+            el: '#app',
+            data: {
+                searchQuery: "",
+                initialGames: [
+                    { name: "Cyberpunk 2077", rating: "8/10", description: "Экшен с открытым миром в футуристическом городе Night City.", showDescription: true, link: "https://www.cyberpunk.net" },
+                    { name: "The Witcher 3", rating: "9.5/10", description: "РПГ о ведьмаке Геральте, исследующем мир, полный магии и монстров.", showDescription: true, link: "https://thewitcher.com" },
+                    { name: "Red Dead Redemption 2", rating: "9/10", description: "Экшен и приключенческая игра о Диком Западе с открытым миром.", showDescription: true, link: "https://www.rockstargames.com/reddeadredemption2" },
+                    { name: "Horizon Forbidden West", rating: "9/10", description: "РПГ с элементами выживания в будущем мире, где машины захватили Землю.", showDescription: true, link: "https://www.playstation.com/en-us/games/horizon-forbidden-west/" },
+                    { name: "Assassin's Creed Valhalla", rating: "8.5/10", description: "Экшен и приключения в мире викингов, с богатой историей и битвами.", showDescription: true, link: "https://www.ubisoft.com/game/assassins-creed/valhalla" },
+                    { name: "Minecraft", rating: "10/10", description: "Песочница, где игроки могут строить и выживать в огромных мирах.", showDescription: true, link: "https://www.minecraft.net" },
+                    { name: "Fortnite", rating: "9/10", description: "Популярная battle royale игра с уникальной механикой строительства.", showDescription: true, link: "https://www.epicgames.com/fortnite" },
+                    { name: "Overwatch 2", rating: "9.5/10", description: "Командный шутер с яркими персонажами и тактическими боями.", showDescription: true, link: "https://playoverwatch.com" }
+                ],
+                games: [],
+                commented: false // Флаг для отслеживания, оставил ли пользователь комментарий
+            },
+            computed: {
+                // computed свойство для фильтрации списка игр по поисковому запросу
+                filteredGames() {
+                    return this.games.filter(game => 
+                        game.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+                    );
+                }
+            },
+            methods: {
+                showGameDetails(game) {
+                    document.getElementById('message-box').style.display = 'block';
+                    document.getElementById('message-text').textContent = `Вы выбрали игру: ${game.name}`;
+                    document.getElementById('game-link').href = game.link;
+                },
+
+                addGame(newGame) {
+                    // Проверяем, существует ли уже игра с таким названием
+                    const existingGame = this.games.find(game => game.name === newGame.name);
+
+                    // Если игра не найдена, добавляем её в список
+                    if (!existingGame) {
+                        this.games.push(newGame);
+                    } else {
+                        alert("Elden Ring уже добавлен в список!");
+                    }
+                },
+
+                removeLastGame() {
+                    this.games.pop();
+                },
+
+                changeTitle() {
+                    // Сброс массива игр в первоначальное состояние
+                    this.games = [...this.initialGames];
+                    document.getElementById("main-title").innerText = "Обновленный рейтинг игр";
+                },
+
+                handleCommentClick() {
+                    if (!this.commented) {
+                        alert("Спасибо за ваш комментарий!");
+                        this.commented = true;
+                    }
+                }
+            },
+            created() {
+                // Изначально заполняем список играми
+                this.games = [...this.initialGames];
+            }
+        });
+    </script>
+
+ <!-- Подключаем game.js -->
+ <script src="game.js"></script>
+</body>
+</html>

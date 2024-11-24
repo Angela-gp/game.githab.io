@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<?xml-stylesheet href="style.xsl" type="text/xsl"?>
+<!-- Этот документ содержит информацию о победителях Game Awards с 2014 по 2023 годы. -->
+<gameAwards>
+    <year>
+        <yearNumber>2014</yearNumber>
+        <winner>Dragon Age: Inquisition</winner>
+        <developer>BioWare</developer>
+    </year>
+    <year>
+        <yearNumber>2015</yearNumber>
+        <winner>The Witcher 3: Wild Hunt</winner>
+        <developer>CD Projekt Red</developer>
+    </year>
+    <year>
+        <yearNumber>2016</yearNumber>
+        <winner>Overwatch</winner>
+        <developer>Blizzard Entertainment</developer>
+    </year>
+    <year>
+        <yearNumber>2017</yearNumber>
+        <winner>The Legend of Zelda: Breath of the Wild</winner>
+        <developer>Nintendo</developer>
+    </year>
+    <year>
+        <yearNumber>2018</yearNumber>
+        <winner>God of War</winner>
+        <developer>Santa Monica Studio</developer>
+    </year>
+    <year>
+        <yearNumber>2019</yearNumber>
+        <winner>Sekiro: Shadows Die Twice</winner>
+        <developer>FromSoftware</developer>
+    </year>
+    <year>
+        <yearNumber>2020</yearNumber>
+        <winner>The Last of Us Part II</winner>
+        <developer>Naughty Dog</developer>
+    </year>
+    <year>
+        <yearNumber>2021</yearNumber>
+        <winner>It Takes Two</winner>
+        <developer>Hazelight Studios</developer>
+    </year>
+    <year>
+        <yearNumber>2022</yearNumber>
+        <winner>Elden Ring</winner>
+        <developer>FromSoftware</developer>
+    </year>
+    <year>
+        <yearNumber>2023</yearNumber>
+        <winner>Baldur's Gate 3</winner>
+        <developer>Larian Studios</developer>
+    </year>
+    
+    <!-- Секция CDATA для специфической информации -->
+    <extraInfo>
+        <![CDATA[
+        Дополнительная информация может быть включена здесь, например, о будущих номинациях или специальных проектах.
+        Этот раздел защищен от обработки XML-сущностей.
+        ]]>
+    </extraInfo>
+</gameAwards>

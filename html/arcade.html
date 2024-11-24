@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Game</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <header>
+        <h1>Arcade Game</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- Элементы управления для настройки волн -->
+        <div class="controls">
+            <label for="sizeControl">Wave Size:</label>
+            <input type="range" id="sizeControl" min="5" max="50" value="5">
+            <span id="sizeValue">5</span>
+
+            <label for="frequencyControl">Wave Frequency:</label>
+            <input type="range" id="frequencyControl" min="1" max="10" value="5">
+            <span id="frequencyValue">5</span>
+
+            <label for="speedControl">Wave Speed:</label>
+            <input type="range" id="speedControl" min="1" max="10" value="5">
+            <span id="speedValue">5</span>
+
+            <label for="opacityControl">Wave Opacity:</label>
+            <input type="range" id="opacityControl" min="0" max="1" step="0.01" value="0.5">
+            <span id="opacityValue">0.5</span>
+
+            <button id="toggleAnimation">Toggle Animation</button>
+        </div>
+        
+    </main>
+    <footer>
+        <p>&copy; 2024 Gaming Industry Hub</p>
+    </footer>
+    <script src="game.js"></script> <!-- Подключаем общий файл JS -->
+</body>
+</html>
