@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0a0a0a; /* Глубокий черный фон */
+    color: #00cc66; /* Более мягкий неоново-зеленый */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(145deg, #0a0a0a, #1a1a1a); /* Сдержанный градиент */
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 204, 102, 0.5); /* Мягкая неоновая подсветка */
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2.5em;
+    color: #00cc66;
+    text-shadow: 0 0 8px rgba(0, 204, 102, 0.7); /* Менее яркое свечение */
+}
+
+.search-box {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.search-box input {
+    padding: 10px;
+    width: 80%;
+    max-width: 300px;
+    font-size: 16px;
+    border: 1px solid #00cc66;
+    border-radius: 5px;
+    background-color: #121212; /* Темный фон */
+    color: #00cc66;
+    box-shadow: 0 0 5px rgba(0, 204, 102, 0.5);
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.search-box input:focus {
+    box-shadow: 0 0 15px rgba(0, 204, 102, 0.8);
+}
+
+.games-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.game-item {
+    background-color: #141414; /* Более темный фон карточек */
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    border: 1px solid #00cc66;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 204, 102, 0.5); /* Мягкая тень */
+    transition: transform 0.3s, box-shadow 0.3s ease-in-out;
+    color: #00cc66;
+}
+
+.game-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 204, 102, 0.8); /* Активная подсветка при наведении */
+}
+
+.game-item h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    text-shadow: 0 0 5px rgba(0, 204, 102, 0.7); /* Слегка заметное свечение */
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.game-item h3:hover {
+    color: #ffffff; /* Изменение цвета текста при наведении */
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8); /* Белая подсветка */
+}
+
+.game-item p {
+    font-size: 14px;
+    color: #005c1c; /* Более мягкий зеленый для описания */
+    transition: color 0.3s ease-in-out;
+}
+
+.game-item p.hidden {
+    display: none;
+}
+
+footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #00cc66;
+    font-size: 12px;
+    text-shadow: 0 0 5px rgba(0, 204, 102, 0.5);
+}
+
+@keyframes backgroundZoom {
+    0% {
+        background-image: url('image1.jpg');  /* Первая картинка */
+        background-size: 100%;  /* Исходный размер */
+    }
+    25% {
+        background-image: url('image2.jpg');  /* Вторая картинка */
+        background-size: 120%;  /* Увеличиваем фон */
+    }
+    50% {
+        background-image: url('image3.jpg');  /* Третья картинка */
+        background-size: 150%;  /* Увеличиваем фон */
+    }
+    75% {
+        background-image: url('image4.jpg');  /* Четвертая картинка */
+        background-size: 120%;  /* Уменьшаем фон */
+    }
+    100% {
+        background-image: url('image1.jpg');  /* Снова первая картинка */
+        background-size: 100%;  /* Возвращаемся к исходному размеру */
+    }
+}
+
+body {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Закрепить фон */
+    animation: backgroundZoom 30s infinite alternate; /* Медленная анимация, 30 секунд */
+    min-height: 100vh;
+    margin: 0;
+}

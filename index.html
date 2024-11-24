@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Industry Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стиль для стрелки */
+        .arrow {
+            font-size: 40px;
+            animation: moveArrow 1s infinite;
+        }
+
+        @keyframes moveArrow {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Gaming Industry Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="arcade.html">Settings</a></li>
+                <li><a href="recommendations.html">Game Recommendations</a></li> <!-- Новая ссылка -->
+                <li><a href="gamingAwards.html">Game Awards Winners</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="news-carousel">
+            <div class="news-item">
+                <img src="https://i.playground.ru/e/rsGXecDQvwktpAlCu2xIsg.png" alt="Новость 1">
+                <h3>Гейминг в 2024: Лучшие релизы</h3>
+                <p>Узнайте о самых ожидаемых играх этого года.</p>
+                <a href="https://www.ign.com/articles/best-upcoming-games" target="_blank">Читать подробнее</a>
+            </div>
+            <div class="news-item">
+                <img src="https://www.anaitgames.com/wp-content/uploads/2021/06/larian-studio-sede-barcelona1.jpg" alt="Новость 2">
+                <h3>Секреты успешных RPG</h3>
+                <p>Как разработчики создают шедевры.</p>
+                <a href="https://www.pcgamer.com/the-best-rpgs/" target="_blank">Читать подробнее</a>
+            </div>
+            <div class="news-item">
+                <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_3840/eddc6a2126270.5dc420a68bda8.jpg" alt="Новость 3">
+                <h3>Влияние AI на разработку игр</h3>
+                <p>Искусственный интеллект меняет всё.</p>
+                <a href="https://www.gamasutra.com/blogs/AI_in_gaming" target="_blank">Читать подробнее</a>
+            </div>
+            <div class="news-item">
+                <img src="https://worldoftanks.com/dcont/fb/image/wot1.jpg?MEDIA_PREFIX=/dcont/fb/" alt="Новость 4">
+                <h3>Эволюция графики</h3>
+                <p>Сравнение игр 2000-х и 2020-х годов.</p>
+                <a href="https://www.gamesradar.com/graphics-evolution-in-gaming/" target="_blank">Читать подробнее</a>
+            </div>
+            <div class="news-item">
+                <img src="https://live.staticflickr.com/65535/53129271743_107ea57f5f_b.jpg" alt="Новость 5">
+                <h3>Киберспорт: тренды 2024</h3>
+                <p>Популярные дисциплины и рекорды турниров.</p>
+                <a href="https://www.esportsobserver.com/top-esports-trends-2024/" target="_blank">Читать подробнее</a>
+            </div>
+            <div class="news-item">
+                <img src="https://avatars.mds.yandex.net/i?id=3096e482afe535e75e9ee1c8b9d8a962_l-5220417-images-thumbs&n=13" alt="Новость 6">
+                <h3>Инди-игры: Звёзды и неудачи</h3>
+                <p>Какие проекты ворвались в топ, а какие провалились?</p>
+                <a href="https://www.indiegamereview.com/top-indie-games/" target="_blank">Читать подробнее</a>
+            </div>
+            <div class="news-item">
+                <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" alt="Новость 7">
+                <h3>Будущее VR-гейминга</h3>
+                <p>Что нас ждёт в виртуальной реальности?</p>
+                <a href="https://uploadvr.com/next-gen-vr-gaming/" target="_blank">Читать подробнее</a>
+            </div>
+        </section>
+        
+        <section class="block-container">
+            <div class="block">
+                <h3>Popular Genres</h3>
+                <ul>
+                    <li>Action</li>
+                    <li>Adventure</li>
+                    <li>Role-Playing Games (RPG)</li>
+                    <li>Simulation</li>
+                    <li>Strategy</li>
+                </ul>
+                <img src="genres.jpg" alt="Popular Genres" class="block-image">
+            </div>
+            <div class="block">
+                <h3>Top Platforms</h3>
+                <ol>
+                    <li>PC</li>
+                    <li>PlayStation</li>
+                    <li>Xbox</li>
+                    <li>Nintendo Switch</li>
+                    <li>Mobile</li>
+                </ol>
+                <img src="platforms.jpg" alt="Gaming Platforms" class="block-image">
+            </div>
+
+        </section>
+        <div class="cascade-item">
+            <p></p>
+            <div class="social-share">
+                <a href="#" class="social-icon">Facebook</a>
+                <a href="#" class="social-icon">Twitter</a>
+                <a href="#" class="social-icon">Instagram</a>
+            </div>
+        </div>        
+
+        <div class="cascade-item">
+            <iframe width="400" height="225" src="https://www.youtube.com/embed/9blwxyOXuRI?si=v6iEN7C_eWmK7-K6" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p>Hot news</p>
+        </div>
+        
+            <div class="view-all-button">
+                <a href="#" class="btn-view-all">View All Features</a>
+            </div>
+        </section>
+
+        <div class="arrow">&#8595;</div> <!-- Стрелка для анимации -->
+            
+    </main>
+    <footer>
+        <p>&copy; 2024 Gaming Industry Hub</p>
+    </footer>
+
+    <script>
+        // Работа с alert, confirm и prompt
+        alert("Добро пожаловать на Gaming Industry Hub!");
+
+        const userConfirmed = confirm("Хотите узнать больше о новых играх?");
+        if (userConfirmed) {
+            const userName = prompt("Как вас зовут?", "Геймер");
+            alert(`Приятно познакомиться, ${userName}! Наслаждайтесь изучением игр.`);
+        }
+        
+        document.querySelector('main').appendChild(fetchDataButton);
+    </script>
+    
+ <script src="game.js"></script> <!-- Подключение JS -->
+</body>
+</html>

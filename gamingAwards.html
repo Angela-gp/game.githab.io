@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Awards Winners</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Общие стили */
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(to bottom, #050505, #1b1b1b);
+            color: #00ff99;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #111111;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #00ff99;
+            text-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #00ff99;
+            text-decoration: none;
+        }
+
+        /* Блок управления */
+        .controls {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .controls input, .controls button {
+            padding: 10px;
+            margin-right: 5px;
+            border: 1px solid #00ff99;
+            background-color: #1b1b1b;
+            color: #00ff99;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .controls input {
+            width: 300px;
+        }
+
+        .controls button:hover {
+            background-color: #00ffcc;
+            color: #1b1b1b;
+        }
+
+        /* Общий стиль таблицы */
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+
+        /* Заголовок таблицы */
+        table th {
+            background-color: #00ffcc;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        /* Обычные ячейки */
+        table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #444;
+        }
+
+        /* Чередование строк */
+        table tr:nth-child(even) {
+            background-color: #2a2a2a;
+        }
+
+        table tr:hover {
+            background-color: #333;
+            color: #00ffcc;
+            cursor: pointer;
+        }
+
+        /* Список победителей */
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        ul li {
+            margin: 5px 0;
+            padding: 10px;
+            background-color: #1b1b1b;
+            border: 1px solid #00ff99;
+            border-radius: 5px;
+            color: #00ff99;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Победители Game Awards</h1>
+    </header>
+    <div class="controls">
+        <input type="text" id="filterWinner" placeholder="Введите название игры" oninput="filterTable()">
+        <button onclick="sortTable(0)">Сортировать по году</button>
+        <button onclick="sortTable(1)">Сортировать по названию</button>
+    </div>
+    <h2>Список победителей</h2>
+    <div id="winnerList"></div>
+    <h2>Таблица победителей</h2>
+    <table id="winnerTable"></table>
+
+    <script>
+        // Загрузка XML-файла
+        fetch('gameAwards.xml')
+            .then(response => response.text())
+            .then(xmlString => {
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(xmlString, "text/xml");
+
+                // Отображение списка победителей
+                const years = xml.getElementsByTagName('year');
+                const listDiv = document.getElementById('winnerList');
+                let ul = '<ul>';
+                let winners = [];
+                for (let i = 0; i < years.length; i++) {
+                    const yearNumber = years[i].getElementsByTagName('yearNumber')[0].textContent;
+                    const winner = years[i].getElementsByTagName('winner')[0].textContent;
+                    winners.push({ year: yearNumber, winner: winner });
+                    ul += `<li data-year="${yearNumber}" data-winner="${winner}">${yearNumber}: ${winner}</li>`;
+                }
+                ul += '</ul>';
+                listDiv.innerHTML = ul;
+
+                // Отображение таблицы
+                const table = document.getElementById('winnerTable');
+                let tableHTML = ` 
+                    <tr>
+                        <th>Год</th>
+                        <th>Игра</th>
+                        <th>Разработчик</th>
+                    </tr>
+                `;
+                for (let i = 0; i < years.length; i++) {
+                    const yearNumber = years[i].getElementsByTagName('yearNumber')[0].textContent;
+                    const winner = years[i].getElementsByTagName('winner')[0].textContent;
+                    const developer = years[i].getElementsByTagName('developer')[0].textContent;
+                    tableHTML += `
+                        <tr data-year="${yearNumber}" data-winner="${winner}">
+                            <td>${yearNumber}</td>
+                            <td>${winner}</td>
+                            <td>${developer}</td>
+                        </tr>
+                    `;
+                }
+                table.innerHTML = tableHTML;
+            });
+
+        // Сортировка таблицы и списка
+        function sortTable(columnIndex) {
+            const table = document.getElementById('winnerTable');
+            let rows = Array.from(table.rows).slice(1); // Пропускаем заголовок таблицы
+            rows.sort((a, b) => {
+                const textA = a.cells[columnIndex].textContent.trim();
+                const textB = b.cells[columnIndex].textContent.trim();
+                return textA.localeCompare(textB, undefined, { numeric: true });
+            });
+            rows.forEach(row => table.appendChild(row));
+
+            // Сортировка списка по data атрибуту
+            const listItems = Array.from(document.querySelectorAll('#winnerList li'));
+            listItems.sort((a, b) => {
+                const valueA = columnIndex === 0 ? a.dataset.year : a.dataset.winner.toLowerCase();
+                const valueB = columnIndex === 0 ? b.dataset.year : b.dataset.winner.toLowerCase();
+                return valueA.localeCompare(valueB, undefined, { numeric: true });
+            });
+
+            const ul = document.querySelector('#winnerList ul');
+            listItems.forEach(item => ul.appendChild(item)); // Перемещаем элементы
+        }
+    </script>
+</body>
+</html>
